@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Game Collection</title>
+    <title>Memory Test</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -15,7 +15,6 @@
             color: #023047;
             margin-bottom: 20px;
         }
-        /* Memory Game Styles */
         #game-board {
             display: flex;
             justify-content: center;
@@ -55,45 +54,11 @@
         button:hover {
             background-color: #ffb703;
         }
-        /* Calculation Game Styles */
-        .game-container {
-            margin: 50px auto;
-            padding: 20px;
-            width: 300px;
-            background-color: #ffffff;
-            border-radius: 10px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-        }
-        input[type="number"] {
-            padding: 10px;
-            margin: 10px;
-            width: calc(100% - 40px);
-            border: 1px solid #219ebc;
-            border-radius: 5px;
-        }
-        .start-btn {
-            margin-top: 20px;
-        }
-        #result {
-            font-size: 18px;
-            margin-top: 20px;
-            color: #023047;
-        }
-        #score {
-            font-size: 24px;
-            font-weight: bold;
-            color: #fb8500;
-        }
-        #timer {
-            font-size: 18px;
-            color: #219ebc;
-            margin-bottom: 10px;
-        }
     </style>
 </head>
 <body>
     <!-- Memory Game Section -->
-    <h1>Memory Score Game</h1>
+    <h1>Memory Test</h1>
     <p>Remember the sequence of numbers!</p>
     <div id="game-board"></div>
     <div id="input-sequence">
@@ -103,18 +68,6 @@
     <p id="result"></p>
     <p><strong>Score:</strong> <span id="memory-score">0</span></p>
     <button onclick="startMemoryGame()">Start Memory Game</button>
-
-    <!-- Calculation Game Section -->
-    <div class="game-container">
-        <h1>Calculation Ability Test</h1>
-        <div id="timer">Time Remaining: <span id="time">10</span> seconds</div>
-        <div id="question-container"></div>
-        <input type="number" id="user-answer" placeholder="Your answer" />
-        <button onclick="checkAnswer()">Submit</button>
-        <div id="calculation-result"></div>
-        <p>Score: <span id="calculation-score">0</span></p>
-        <button onclick="startCalculationGame()" class="start-btn">Start Calculation Game</button>
-    </div>
 
     <script>
         // Memory Game Logic
@@ -163,75 +116,6 @@
             document.getElementById('memory-score').textContent = memoryScore;
             document.getElementById('userInput').value = '';
             setTimeout(startMemoryGame, 1000);
-        }
-
-        // Calculation Game Logic
-        let calculationScore = 0;
-        let currentQuestion = 0;
-        let timer;
-        const totalTime = 10;
-        const questions = [
-            { question: "5 + 3", answer: 8 },
-            { question: "12 - 4", answer: 8 },
-            { question: "3 * 7", answer: 21 },
-            { question: "20 / 4", answer: 5 }
-        ];
-
-        function startCalculationGame() {
-            calculationScore = 0;
-            currentQuestion = 0;
-            document.getElementById('calculation-score').textContent = calculationScore;
-            document.getElementById('calculation-result').textContent = '';
-            document.getElementById('user-answer').value = '';
-            document.getElementById('time').textContent = totalTime;
-            displayQuestion();
-        }
-
-        function displayQuestion() {
-            if (currentQuestion < questions.length) {
-                document.getElementById('question-container').textContent = questions[currentQuestion].question;
-                startTimer();
-            } else {
-                endCalculationGame();
-            }
-        }
-
-        function startTimer() {
-            let timeRemaining = totalTime;
-            document.getElementById('time').textContent = timeRemaining;
-            timer = setInterval(() => {
-                timeRemaining--;
-                document.getElementById('time').textContent = timeRemaining;
-                if (timeRemaining <= 0) {
-                    clearInterval(timer);
-                    document.getElementById('calculation-result').textContent = 'Time is up! Correct answer was ' + questions[currentQuestion].answer;
-                    currentQuestion++;
-                    calculationScore--;
-                    document.getElementById('calculation-score').textContent = calculationScore;
-                    displayQuestion();
-                }
-            }, 1000);
-        }
-
-        function checkAnswer() {
-            clearInterval(timer);
-            const userAnswer = parseInt(document.getElementById('user-answer').value);
-            const correctAnswer = questions[currentQuestion].answer;
-            if (userAnswer === correctAnswer) {
-                calculationScore++;
-                document.getElementById('calculation-result').textContent = 'Correct!';
-            } else {
-                document.getElementById('calculation-result').textContent = 'Wrong! The correct answer was: ' + correctAnswer;
-            }
-            currentQuestion++;
-            document.getElementById('calculation-score').textContent = calculationScore;
-            document.getElementById('user-answer').value = '';
-            displayQuestion();
-        }
-
-        function endCalculationGame() {
-            document.getElementById('question-container').textContent = 'Game Over! Final Score: ' + calculationScore;
-            document.getElementById('user-answer').style.display = 'none';
         }
     </script>
 </body>

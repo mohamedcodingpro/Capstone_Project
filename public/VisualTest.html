@@ -3,167 +3,137 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Visual Test Game: Identify Shapes</title>
+    <title>Visual Test Game</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            text-align: center;
             background-color: #f0f0f0;
+            text-align: center;
+            padding: 50px;
         }
-
-        .game-container {
-            margin: 50px auto;
-            padding: 20px;
-            width: 300px;
-            background-color: #ffffff;
-            border-radius: 10px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-        }
-
-        #shape-container {
-            margin: 20px 0;
-            height: 100px;
-        }
-
-        .shape {
-            display: inline-block;
-            width: 100px;
-            height: 100px;
-            margin: 0 auto;
-        }
-
-        .circle {
-            border-radius: 50%;
-            background-color: #219ebc;
-        }
-
-        .square {
-            background-color: #ffb703;
-        }
-
-        .triangle {
-            width: 0;
-            height: 0;
-            border-left: 50px solid transparent;
-            border-right: 50px solid transparent;
-            border-bottom: 100px solid #8ecae6;
-        }
-
-        .buttons button {
-            padding: 10px 20px;
-            margin: 10px;
-            border: none;
-            background-color: #219ebc;
-            color: white;
-            font-size: 16px;
-            cursor: pointer;
-        }
-
-        .buttons button:hover {
-            background-color: #ffb703;
-        }
-
-        #result {
-            font-size: 18px;
-            margin-top: 20px;
-            color: green;
-        }
-
-        .start-btn {
-            margin-top: 20px;
-            padding: 10px 20px;
-            border: none;
-            background-color: #023047;
-            color: white;
-            font-size: 16px;
-            cursor: pointer;
-        }
-
-        .start-btn:hover {
-            background-color: #ffb703;
-        }
-
-        #score {
-            font-size: 24px;
-            font-weight: bold;
+        h1 {
             color: #023047;
+            margin-bottom: 20px;
+        }
+        #color-display {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        .color-options {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+        .color-option {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid #ffffff;
+            transition: transform 0.3s;
+        }
+        .color-option:hover {
+            transform: scale(1.1);
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #fb8500;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 20px;
+        }
+        button:hover {
+            background-color: #ffb703;
+        }
+        #result {
+            margin-top: 20px;
+            font-size: 1.2rem;
+            color: #219ebc;
+        }
+        #score {
+            font-size: 1.5rem;
+            margin-top: 10px;
+            color: #fb8500;
+        }
+        #timer {
+            font-size: 1.5rem;
+            margin-top: 10px;
+            color: #219ebc;
         }
     </style>
 </head>
 <body>
+    <h1>Visual Test Game</h1>
+    <p>Remember the color and choose the correct one!</p>
 
-    <div class="game-container">
-        <h1>Identify the Shape</h1>
-        <div id="shape-container"></div>
-
-        <div class="buttons">
-            <button onclick="checkAnswer('circle')">Circle</button>
-            <button onclick="checkAnswer('square')">Square</button>
-            <button onclick="checkAnswer('triangle')">Triangle</button>
-        </div>
-
-        <div id="result"></div>
-        <p>Score: <span id="score">0</span></p>
-        <button onclick="startGame()" class="start-btn">Start New Game</button>
+    <div id="color-display"></div>
+    <div class="color-options">
+        <div class="color-option" style="background-color: red;" onclick="checkColor('red')"></div>
+        <div class="color-option" style="background-color: green;" onclick="checkColor('green')"></div>
+        <div class="color-option" style="background-color: blue;" onclick="checkColor('blue')"></div>
+        <div class="color-option" style="background-color: yellow;" onclick="checkColor('yellow')"></div>
     </div>
 
+    <button onclick="startVisualTest()">Start Game</button>
+    <p id="result"></p>
+    <p id="score">Score: 0</p>
+    <p id="timer">Time: 10s</p>
+
     <script>
-        const shapes = ['circle', 'square', 'triangle'];
-        let currentShape = '';
+        let correctColor;
         let score = 0;
-        let timer;
-        let timeRemaining = 10;
+        let timeLeft = 10;
+        let timerInterval;
 
-        function startGame() {
-            score = 0; // Reset score
-            document.getElementById('score').textContent = score;
-            timeRemaining = 10; // Reset timer
+        function startVisualTest() {
             document.getElementById('result').textContent = '';
-            document.getElementById('shape-container').innerHTML = ''; // Clear shape
-            startTimer();
-            displayNewShape();
+            score = 0; // Reset score
+            document.getElementById('score').textContent = 'Score: ' + score; // Display reset score
+            timeLeft = 10; // Reset timer
+            document.getElementById('timer').textContent = 'Time: ' + timeLeft + 's'; // Display reset time
+            
+            timerInterval = setInterval(updateTimer, 1000); // Start timer
+            showRandomColor(); // Start showing colors
         }
 
-        function startTimer() {
-            timer = setInterval(() => {
-                timeRemaining--;
-                if (timeRemaining <= 0) {
-                    clearInterval(timer);
-                    document.getElementById('result').textContent = 'Time is up! Final Score: ' + score;
-                    document.getElementById('shape-container').innerHTML = ''; // Clear shape
-                } else {
-                    document.getElementById('result').textContent = 'Time Remaining: ' + timeRemaining;
-                }
-            }, 1000);
+        function showRandomColor() {
+            const colors = ['red', 'green', 'blue', 'yellow'];
+            correctColor = colors[Math.floor(Math.random() * colors.length)];
+            const colorDisplay = document.getElementById('color-display');
+            
+            // Show the correct color for a short time
+            colorDisplay.style.backgroundColor = correctColor;
+            setTimeout(() => {
+                colorDisplay.style.backgroundColor = '#f0f0f0'; // Hide color
+                if (timeLeft > 0) showRandomColor(); // Continue showing colors if time left
+            }, 1500); // Display color for 1.5 seconds
         }
 
-        function displayNewShape() {
-            const randomShape = shapes[Math.floor(Math.random() * shapes.length)];
-            currentShape = randomShape;
-
-            const shapeContainer = document.getElementById('shape-container');
-            shapeContainer.innerHTML = ''; // Clear previous shape
-
-            const shapeElement = document.createElement('div');
-            shapeElement.classList.add('shape', randomShape);
-            shapeContainer.appendChild(shapeElement);
-        }
-
-        function checkAnswer(answer) {
-            if (timeRemaining > 0) {
-                if (answer === currentShape) {
-                    score++;
-                    document.getElementById('result').textContent = 'Correct!';
-                } else {
-                    document.getElementById('result').textContent = 'Wrong! Try again.';
-                }
-                updateScore();
-                displayNewShape(); // Change shape after answer
+        function updateTimer() {
+            timeLeft--;
+            document.getElementById('timer').textContent = 'Time: ' + timeLeft + 's';
+            if (timeLeft <= 0) {
+                clearInterval(timerInterval); // Stop the timer
+                document.getElementById('result').textContent = 'Time\'s up! Your final score is: ' + score; // Display final score
+                document.getElementById('color-display').style.backgroundColor = '#f0f0f0'; // Reset color display
             }
         }
 
-        function updateScore() {
-            document.getElementById('score').textContent = score;
+        function checkColor(selectedColor) {
+            const resultDisplay = document.getElementById('result');
+            if (selectedColor === correctColor) {
+                resultDisplay.textContent = 'Correct! Well done!';
+                score++; // Increment score for a correct answer
+            } else {
+                resultDisplay.textContent = 'Incorrect! Try again.';
+            }
+            document.getElementById('score').textContent = 'Score: ' + score; // Update score display
         }
     </script>
 </body>

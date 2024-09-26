@@ -3,12 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<<<<<<< HEAD
     <title>Community Forum</title>
     
-=======
-    <title>Community Engagement</title>
->>>>>>> 7fd0b3f5aa8eab9ddd44df12757cfde473419c71
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -52,10 +48,7 @@
         .post {
             border-bottom: 1px solid #ddd;
             padding: 15px 0;
-<<<<<<< HEAD
             position: relative;
-=======
->>>>>>> 7fd0b3f5aa8eab9ddd44df12757cfde473419c71
         }
         .post:last-child {
             border-bottom: none;
@@ -93,17 +86,10 @@
             font-size: 14px;
             border-radius: 5px;
             cursor: pointer;
-<<<<<<< HEAD
-=======
-            display: flex;
-            align-items: center;
-            gap: 5px;
->>>>>>> 7fd0b3f5aa8eab9ddd44df12757cfde473419c71
         }
         .post-actions button:hover {
             background-color: #0277bd;
         }
-<<<<<<< HEAD
         .post-actions .delete-button {
             background-color: #ff6f61;
         }
@@ -122,36 +108,11 @@
             margin-top: 10px;
         }
         .reply-section input[type="text"] {
-=======
-        .post-actions input[type="text"] {
->>>>>>> 7fd0b3f5aa8eab9ddd44df12757cfde473419c71
             width: calc(100% - 120px);
             padding: 5px;
             border: 1px solid #ccc;
             border-radius: 4px;
             font-size: 14px;
-<<<<<<< HEAD
-=======
-            display: none; /* Hide the comment input field initially */
-        }
-        .reply-section {
-            margin-top: 5px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .reply-section button {
-            background-color: #8ecae6;
-            color: white;
-            border: none;
-            padding: 5px 10px;
-            font-size: 14px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .reply-section button:hover {
-            background-color: #219ebc;
->>>>>>> 7fd0b3f5aa8eab9ddd44df12757cfde473419c71
         }
         #new-post {
             margin-bottom: 20px;
@@ -181,7 +142,6 @@
         #new-post button:hover {
             background-color: #0277bd;
         }
-<<<<<<< HEAD
         .nav-links {
             margin-top: 20px;
             text-align: center;
@@ -193,8 +153,6 @@
         .nav-links a:hover {
             text-decoration: underline;
         }
-=======
->>>>>>> 7fd0b3f5aa8eab9ddd44df12757cfde473419c71
         @media (max-width: 768px) {
             #main-container {
                 flex-direction: column;
@@ -213,16 +171,11 @@
             <h2>New Post</h2>
             <div id="new-post">
                 <textarea placeholder="What's on your mind?"></textarea>
-<<<<<<< HEAD
                 <button id="post-button">Post</button>
-=======
-                <button>Post</button>
->>>>>>> 7fd0b3f5aa8eab9ddd44df12757cfde473419c71
             </div>
 
             <h2>Recent Posts</h2>
 
-<<<<<<< HEAD
             <div id="posts-container">
                 <!-- Posts will be dynamically inserted here -->
             </div>
@@ -300,68 +253,6 @@
                     post.remove();
                 }
             }
-=======
-            <div class="post">
-                <div class="post-header">
-                    <h3>User123</h3>
-                    <span>2 hours ago</span>
-                </div>
-                <div class="post-content">
-                    Dementia care requires patience and understanding. What are some strategies you use to manage daily challenges?
-                </div>
-                <div class="post-actions">
-                    <button class="like-button">Like</button>
-                    <input type="text" placeholder="Comment...">
-                    <div class="reply-section">
-                        <button class="reply-button">Reply</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="post">
-                <div class="post-header">
-                    <h3>Caregiver</h3>
-                    <span>4 hours ago</span>
-                </div>
-                <div class="post-content">
-                    I found that keeping a daily routine helps both me and my loved one stay on track. Consistency is key.
-                </div>
-                <div class="post-actions">
-                    <button class="like-button">Like</button>
-                    <input type="text" placeholder="Comment...">
-                    <div class="reply-section">
-                        <button class="reply-button">Reply</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="post">
-                <div class="post-header">
-                    <h3>FamilySupport</h3>
-                    <span>Yesterday</span>
-                </div>
-                <div class="post-content">
-                    Nutrition plays such a vital role in brain health. Does anyone have good recipes for a brain-healthy diet?
-                </div>
-                <div class="post-actions">
-                    <button class="like-button">Like</button>
-                    <input type="text" placeholder="Comment...">
-                    <div class="reply-section">
-                        <button class="reply-button">Reply</button>
-                    </div>
-                </div>
-            </div>
-            
-        </section>
-    </div>
-
-    <script>
-        document.querySelectorAll('.reply-button').forEach(button => {
-            button.addEventListener('click', function() {
-                const commentInput = this.closest('.post-actions').querySelector('input[type="text"]');
-                commentInput.style.display = commentInput.style.display === 'none' ? 'block' : 'none';
-            });
->>>>>>> 7fd0b3f5aa8eab9ddd44df12757cfde473419c71
         });
     </script>
 </body>

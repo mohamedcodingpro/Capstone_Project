@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scoring Application</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        form {
+            max-width: 600px;
+            margin: 20px auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .category {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #219ebc;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #023047;
+        }
+        .result {
+            background-color: #e0f7fa;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Cognitive Assessment Scoring</h1>
+    <form id="scoringForm">
+        <div class="category">
+            <label for="memoryInput">Memory Test (e.g., recall a word)</label>
+            <input type="text" id="memoryInput" placeholder="Enter memory score (0-10)">
+        </div>
+        <div class="category">
+            <label for="languageInput">Language Test (e.g., describe an object)</label>
+            <input type="text" id="languageInput" placeholder="Enter language score (0-10)">
+        </div>
+        <div class="category">
+            <label for="visualInput">Visual Test (e.g., identify shapes)</label>
+            <input type="text" id="visualInput" placeholder="Enter visual score (0-10)">
+        </div>
+        <div class="category">
+            <label for="attentionInput">Attention Test (e.g., focus tasks)</label>
+            <input type="text" id="attentionInput" placeholder="Enter attention score (0-10)">
+        </div>
+        <div class="category">
+            <label for="orientationInput">Orientation Test (e.g., time/place)</label>
+            <input type="text" id="orientationInput" placeholder="Enter orientation score (0-10)">
+        </div>
+        <div class="category">
+            <label for="abstractInput">Abstract Thinking Test (e.g., solve logic problems)</label>
+            <input type="text" id="abstractInput" placeholder="Enter abstract thinking score (0-10)">
+        </div>
+        <div class="category">
+            <label for="judgmentInput">Judgment Test (e.g., decision-making)</label>
+            <input type="text" id="judgmentInput" placeholder="Enter judgment score (0-10)">
+        </div>
+        <button type="button" onclick="calculateScores()">Submit and Calculate</button>
+    </form>
+    <div id="result" class="result"></div>
+
+    <script>
+        function calculateScores() {
+            // Collect scores from inputs
+            const memoryScore = parseInt(document.getElementById("memoryInput").value) || 0;
+            const languageScore = parseInt(document.getElementById("languageInput").value) || 0;
+            const visualScore = parseInt(document.getElementById("visualInput").value) || 0;
+            const attentionScore = parseInt(document.getElementById("attentionInput").value) || 0;
+            const orientationScore = parseInt(document.getElementById("orientationInput").value) || 0;
+            const abstractScore = parseInt(document.getElementById("abstractInput").value) || 0;
+            const judgmentScore = parseInt(document.getElementById("judgmentInput").value) || 0;
+
+            // Calculate total score
+            const totalScore = memoryScore + languageScore + visualScore + attentionScore + orientationScore + abstractScore + judgmentScore;
+            const maxScore = 70; // 7 categories, 10 points max each
+
+            // Display result
+            document.getElementById("result").innerHTML = `
+                <h3>Results</h3>
+                <p>Memory Score: ${memoryScore}</p>
+                <p>Language Score: ${languageScore}</p>
+                <p>Visual Score: ${visualScore}</p>
+                <p>Attention Score: ${attentionScore}</p>
+                <p>Orientation Score: ${orientationScore}</p>
+                <p>Abstract Thinking Score: ${abstractScore}</p>
+                <p>Judgment Score: ${judgmentScore}</p>
+                <p><strong>Total Score: ${totalScore}/${maxScore}</strong></p>
+            `;
+        }
+    </script>
+</body>
+</html>
