@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dementia Advice</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        h1 {
+            text-align: center;
+            color: #219ebc;
+            margin-bottom: 20px;
+        }
+        label, select {
+            font-size: 1.1rem;
+            display: block;
+            margin: 10px 0;
+        }
+        select {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 1rem;
+            background-color: #f0f4f8;
+        }
+        .advice {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #edf6f9;
+            border-left: 4px solid #219ebc;
+            border-radius: 5px;
+            color: #023047;
+            font-size: 1rem;
+        }
+        .advice strong {
+            color: #fb8500;
+        }
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+        /* Hover effect */
+        select:hover {
+            border-color: #219ebc;
+        }
+        .advice::before {
+            content: "💡";
+            font-size: 1.5rem;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Select Condition</h1>
+        <label for="condition">Condition:</label>
+        <select id="condition" onchange="displayAdvice()">
+            <option value="" selected disabled>Select an option</option>
+            <option value="demented">Demented</option>
+            <option value="non-demented">Non-Demented</option>
+        </select>
+
+        <div id="advice" class="advice" style="display: none;">
+            <!-- Advice will be displayed here -->
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2024 Parallel Group
+    </footer>
+
+    <script>
+        function displayAdvice() {
+            const condition = document.getElementById('condition').value;
+            const adviceDiv = document.getElementById('advice');
+            let advice = '';
+
+            if (condition === 'demented') {
+                advice = `
+                    <strong>Advice for someone with dementia:</strong><br><br>
+                    1. <strong>Maintain a routine:</strong> Establish a daily routine to reduce confusion and promote a sense of security.<br>
+                    2. <strong>Stay physically active:</strong> Engage in regular physical activity like walking, yoga, or gentle exercises to improve mood and mobility.<br>
+                    3. <strong>Mental stimulation:</strong> Keep mentally active by doing puzzles, reading, or engaging in memory-enhancing activities.<br>
+                    4. <strong>Healthy diet:</strong> Eat a balanced diet rich in fruits, vegetables, whole grains, and omega-3 fatty acids to support brain health.<br>
+                    5. <strong>Social interaction:</strong> Stay connected with loved ones to maintain emotional well-being. Joining a support group can also be beneficial.<br>
+                    6. <strong>Medication adherence:</strong> Take medications as prescribed and have regular checkups with a healthcare provider to manage symptoms.
+                `;
+            } else if (condition === 'non-demented') {
+                advice = `
+                    <strong>Advice for maintaining brain health:</strong><br><br>
+                    1. <strong>Exercise regularly:</strong> Physical exercise, such as aerobic activities and strength training, improves both physical and cognitive health.<br>
+                    2. <strong>Eat brain-healthy foods:</strong> Include foods rich in antioxidants and omega-3 fatty acids, such as fish, nuts, berries, and leafy greens.<br>
+                    3. <strong>Mental exercises:</strong> Challenge your brain with puzzles, reading, learning new skills, or playing strategy games.<br>
+                    4. <strong>Get enough sleep:</strong> Aim for 7-8 hours of restful sleep every night to help the brain regenerate and function optimally.<br>
+                    5. <strong>Stay socially engaged:</strong> Regular interaction with friends, family, and community activities can boost mental and emotional well-being.<br>
+                    6. <strong>Manage stress:</strong> Practice stress-relief techniques such as mindfulness, meditation, or deep breathing exercises to lower the risk of cognitive decline.
+                `;
+            }
+
+            adviceDiv.innerHTML = advice;
+            adviceDiv.style.display = 'block';
+        }
+    </script>
+</body>
+</html>

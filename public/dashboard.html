@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #219ebc;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #023047;
+        }
+        .dropdown {
+            margin-right: 20px; /* Add some spacing */
+        }
+        .dropdown select {
+            background-color: #023047;
+            color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+        }
+        .nav-links {
+            display: flex;
+            gap: 20px; /* Spacing between links */
+        }
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            padding: 14px 20px;
+        }
+        .nav-links a:hover {
+            background-color: #8ecae6;
+        }
+        section {
+            padding: 20px;
+        }
+        #profile-overview {
+            background-color: #f0f4f8;
+            border-radius: 5px;
+            padding: 20px;
+        }
+        .card {
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        .card h3 {
+            margin-top: 0;
+        }
+        .card p {
+            margin: 5px 0;
+        }
+        footer {
+            text-align: center;
+            padding: 20px 0;
+            background-color: #023047;
+            color: white;
+        }
+        .footer-text {
+            color: white;
+        }
+    </style>
+    <script>
+        function navigate() {
+            const dropdown = document.getElementById("nav-dropdown");
+            const selectedValue = dropdown.options[dropdown.selectedIndex].value;
+            if (selectedValue) {
+                window.location.href = selectedValue;
+            }
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Welcome, [User Name]</h1>
+    </header>
+
+    <nav>
+       
+        <div class="nav-links">
+            <!-- <a href="https://flask-api-dem.onrender.com">Predict Dementia</a> -->
+            <a href="/public/recommendations.html">Personalized Recommendations</a>
+            <a href="/public/community.html">Community</a>
+            <a href="/public/settings.html">Settings</a>
+            <a href="/public/prediction-form.html">User Dashboard</a>
+            <a href="https://med-aid-bot.onrender.com/"> ChatBot</a>
+        </div>
+    </nav>
+
+    <section id="profile-overview">
+        <h2>Profile Overview</h2>
+        <div class="card">
+            <h3>Personal Information</h3>
+            <p><strong>Name:</strong> [User Name]</p>
+            <p><strong>Email:</strong> [User Email]</p>
+            <p><strong>Age:</strong> [User Age]</p>
+            <p><strong>Gender:</strong> [User Gender]</p>
+        </div>
+        <div class="card">
+            <h3>Account Status</h3>
+            <p><strong>Status:</strong> Active</p>
+            <p><strong>Membership Plan:</strong> [Plan Type]</p>
+            <p><strong>Last Login:</strong> [Date]</p>
+        </div>
+        <div class="card">
+            <h3>Recent Activity</h3>
+            <p><strong>Last Prediction:</strong> [Date]</p>
+            <p><strong>Recent Recommendations:</strong> [Details or Link]</p>
+            <p><strong>Community Posts:</strong> [Number of Posts or Link]</p>
+        </div>
+        <div class="card">
+            <h3>Personal Metrics</h3>
+            <p><strong>Predictions Made:</strong> [Number]</p>
+            <p><strong>Recommendations Viewed:</strong> [Number]</p>
+            <p><strong>Community Interactions:</strong> [Number]</p>
+        </div>
+    </section>
+
+    <footer>   
+        <p class="footer-text">&copy; 2024 Harmony Group. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

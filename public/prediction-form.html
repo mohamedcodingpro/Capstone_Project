@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirect Button</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #e0f7fa, #80deea);
+            margin: 0;
+        }
+        header {
+            background-color: #219ebc;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            width: 100%;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            border-radius: 0 0 10px 10px;
+        }
+        h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px 0;
+        }
+        .dropdown {
+            margin-right: 20px; /* Add spacing before the button */
+        }
+        .dropdown select {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #80deea;
+            color: #005662;
+            font-size: 1em;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s ease;
+        }
+        .dropdown select:hover {
+            background-color: #4db6ac;
+        }
+        .btn {
+            padding: 15px 30px;
+            font-size: 1.2em;
+            background-color: #ffb703;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s ease;
+        }
+        .btn:hover {
+            background-color: #fb8500;
+        }
+        footer {
+            margin-top: auto;
+            padding: 20px;
+            background-color: #219ebc;
+            color: white;
+            text-align: center;
+            width: 100%;
+            position: relative;
+            bottom: 0;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
+            border-radius: 10px 10px 0 0;
+        }
+        .footer-text {
+            margin: 0;
+        }
+        .nav {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .btn {
+            padding: 10px 20px;
+            background-color: #219ebc;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            text-align: center;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+            margin-right: 10px; /* Add margin to the right of each button */
+        }
+        .btn:hover {
+            background-color: #fb8500;
+        }
+        /* Ensure that the last button doesn't have extra margin */
+        .btn:last-child {
+            margin-right: 0;
+        }
+        a {
+            color: white;
+            text-decoration: none;
+        }
+    </style>
+    <script>
+        function navigate() {
+            const dropdown = document.getElementById("nav-dropdown");
+            const selectedValue = dropdown.options[dropdown.selectedIndex].value;
+            if (selectedValue) {
+                window.location.href = selectedValue;
+            }
+        }
+    </script>
+</head>
+<body>
+
+    <header>
+        <h1>User Dashboard</h1>
+    </header>
+
+    <nav>
+        <div class="dropdown">
+            <select id="nav-dropdown" onchange="navigate()">
+                <option value="">Select a Game Test</option>
+                <option value="/public/AbstractThinkingTest.html">Abstract Test</option>
+                <option value="/public/AttentionTestGame.html">Attention Test</option>
+                <option value="/public/JudgmentTestGame.html">Judgment Test Game</option>
+                <option value="/public/MemoryTest.html">Memory Test</option>
+                <option value="/public/OrientationTestGame.html">Orientation Test Game</option>
+                <option value="/public/VisualTest.html">Visual Test</option>
+            </select>
+        </div>
+        <button class="btn" onclick="window.location.href='https://flask-api-dem.onrender.com';">
+            Go to Prediction Form
+        </button>
+        <button class="btn">
+            <a href="/public/DementiaAdvice.html">Dementia Advice</a>
+        </button>
+    </nav>
+
+    <footer>   
+        <p class="footer-text">&copy; 2024 Harmony Group. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>

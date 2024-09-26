@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculation Ability Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f0f0f0;
+        }
+
+        .game-container {
+            margin: 50px auto;
+            padding: 20px;
+            width: 300px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #023047; /* Dark Blue */
+        }
+
+        #timer {
+            font-size: 18px;
+            color: #219ebc; /* Light Blue */
+        }
+
+        #question-container {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 20px 0;
+            color: #fb8500; /* Orange */
+        }
+
+        input[type="number"] {
+            padding: 10px;
+            margin: 10px;
+            width: calc(100% - 40px);
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            background-color: #219ebc; /* Light Blue */
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #ffb703; /* Yellow */
+        }
+
+        .start-btn {
+            margin-top: 20px;
+            background-color: #fb8500; /* Orange */
+        }
+
+        .start-btn:hover {
+            background-color: #ffb703; /* Yellow */
+        }
+
+        #result {
+            font-size: 18px;
+            margin-top: 20px;
+            color: #8ecae6; /* Light Blue-Gray */
+        }
+
+        #score {
+            font-size: 24px;
+            font-weight: bold;
+            color: #023047; /* Dark Blue */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="game-container">
+        <h1>Calculation Ability Test</h1>
+        <div id="timer">Time Remaining: <span id="time">10</span> seconds</div>
+        <div id="question-container"></div>
+        <input type="number" id="user-answer" placeholder="Your answer" />
+        <button onclick="checkAnswer()">Submit</button>
+        <div id="result"></div>
+        <p>Score: <span id="score">0</span></p>
+        <button onclick="startGame()" class="start-btn">Start New Game</button>
+    </div>
+
+    <script>
+        let score = 0;
+        let currentQuestion = 0;
+        let timer;
+        const totalTime = 10;
+
+        const questions = [
+            { question: "5 + 3", answer: 8 },
+            { question: "12 - 4", answer: 8 },
+            { question: "3 * 7", answer: 21 },
+            { question: "20 / 4", answer: 5 },
+            { question: "15 + 6", answer: 21 },
+            { question: "18 - 9", answer: 9 },
+            { question: "6 * 3", answer: 18 },
+            { question: "49 / 7", answer: 7 }
+        ];
+
+        function startGame() {
+            score = 0; // Reset score
+            currentQuestion = 0; // Reset question index
+            document.getElementById('score').textContent = score;
+            document.getElementById('result').textContent = '';
+            document.getElementById('user-answer').value = '';
+            document.getElementById('time').textContent = totalTime;
+            displayQuestion();
+        }
+
+        function displayQuestion() {
+            if (currentQuestion < questions.length) {
+                document.getElementById('question-container').textContent = questions[currentQuestion].question;
+                startTimer();
+            } else {
+                endGame();
+            }
+        }
+
+        function startTimer() {
+            let timeRemaining = totalTime;
+            document.getElementById('time').textContent = timeRemaining;
+
+            timer = setInterval(() => {
+                timeRemaining--;
+                document.getElementById('time').textContent = timeRemaining;
+
+                if (timeRemaining <= 0) {
+                    clearInterval(timer);
+                    document.getElementById('result').textContent = 'Time is up! The correct answer was: ' + questions[currentQuestion].answer;
+                    currentQuestion++;
+                    score--; // Deduct score for unanswered question
+                    document.getElementById('score').textContent = score;
+                    displayQuestion();
+                }
+            }, 1000);
+        }
+
+        function checkAnswer() {
+            clearInterval(timer); // Stop the timer
+            const userAnswer = parseInt(document.getElementById('user-answer').value);
+            const correctAnswer = questions[currentQuestion].answer;
+
+            if (userAnswer === correctAnswer) {
+                score++;
+                document.getElementById('result').textContent = 'Correct!';
+            } else {
+                document.getElementById('result').textContent = 'Wrong! The correct answer was: ' + correctAnswer;
+            }
+
+            currentQuestion++;
+            document.getElementById('score').textContent = score;
+            document.getElementById('user-answer').value = '';
+            displayQuestion();
+        }
+
+        function endGame() {
+            document.getElementById('question-container').textContent = 'Game Over! Final Score: ' + score;
+            document.getElementById('user-answer').style.display = 'none'; // Hide input
+            document.querySelector("button[onclick='checkAnswer()']").style.display = 'none'; // Hide submit button
+        }
+    </script>
+
+</body>
+</html>
